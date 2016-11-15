@@ -24,28 +24,22 @@ namespace CONDUIT.Controllers
             }
         }
 
-        // GET api/<controller>/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<controller>
-        //public void Post([FromBody]string value)
-        //{
-
-        //}
-
-        //// PUT api/<controller>/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-
-        //}
-
-        //// DELETE api/<controller>/5
-        //public void Delete(int id)
-        //{
-
-        //}
+        // POST api/<controller>
+        [HttpPost]
+        public bool Post(int userId, string currentPassword, string newPassword)
+        {
+            using (var entities = new CONDUIT_Entities())
+            {
+                try
+                {
+                    entities.changePasswordSP(userId, currentPassword, newPassword);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }
