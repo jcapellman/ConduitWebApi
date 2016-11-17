@@ -35,7 +35,7 @@ namespace CONDUIT.Controllers
                     entities.changePasswordSP(userId, currentPassword, newPassword);
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
