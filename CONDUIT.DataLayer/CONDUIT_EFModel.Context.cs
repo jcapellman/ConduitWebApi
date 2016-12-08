@@ -41,5 +41,22 @@ namespace CONDUIT.DataLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("checkLoginSP", usernameParameter, passwordParameter);
         }
+    
+        public virtual int changePasswordSP(Nullable<int> userID, string currentPassword, string newPassword)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var currentPasswordParameter = currentPassword != null ?
+                new ObjectParameter("CurrentPassword", currentPassword) :
+                new ObjectParameter("CurrentPassword", typeof(string));
+    
+            var newPasswordParameter = newPassword != null ?
+                new ObjectParameter("NewPassword", newPassword) :
+                new ObjectParameter("NewPassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("changePasswordSP", userIDParameter, currentPasswordParameter, newPasswordParameter);
+        }
     }
 }
